@@ -1,13 +1,8 @@
 import mysql from 'mysql2';
 import util from 'util';
+import config from 'config';
 
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: 'cryptoapp',
-  port: 3310
-});
+const connection = mysql.createConnection(config.get('mysql'));
 
 const connect = util.promisify(connection.connect).bind(connection);
 const query = util.promisify(connection.query).bind(connection);
