@@ -9,6 +9,7 @@ const port = config.get<number>('app.port');
 server.set('views', path.resolve(__dirname, 'views'));
 server.set('view engine', 'ejs');
 
+server.use(express.urlencoded());
 server.use('/users', userRouter);
 
 server.listen(port, () => {
