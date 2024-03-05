@@ -12,13 +12,23 @@ class MySQL implements Model {
         VALUES
         (?, ?)
         `, [userId, symbol]);
-        
+
         const newUserSymbol: DTO = {
             ...userSymbol,
             id: result.insertId
         };
 
         return newUserSymbol;
+    }
+
+    async getForUser(userId: number): Promise<DTO[]> {
+        const userSymbols: DTO[] = await query(`
+            select  id, user_id, symbol
+            FROM    users_symbols
+            WHERE   user_id = ? 
+        `, [userId]);
+
+        return userSymbols;
     }
 }
 
