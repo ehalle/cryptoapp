@@ -27,5 +27,10 @@
         "host": "localhost",
         "port": 27017,
         "database": "cryptoapp"
+    },
+    "github": {
+        "clientId": "efd570212dde73943971",
+        "clientSecret": "",
+        "callbackUrl": "http://localhost:8082/github/callback"
     }
 }
