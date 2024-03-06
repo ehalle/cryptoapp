@@ -37,3 +37,7 @@ export async function addSymbol (req: Request, res: Response, next: NextFunction
         next(err);
     }
 }
+
+export async function login(req: Request, res: Response, next: NextFunction) {
+    res.render('login');
+}

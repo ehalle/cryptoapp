@@ -29,8 +29,8 @@
         "database": "cryptoapp"
     },
     "github": {
-        "clientId": "efd570212dde73943971",
+        "clientID": "efd570212dde73943971",
         "clientSecret": "",
-        "callbackUrl": "http://localhost:8082/github/callback"
+        "callbackURL": "http://localhost:8082/github/callback"
     }
 }
