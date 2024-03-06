@@ -10,6 +10,7 @@ export async function dashboard (req: Request, res: Response, next: NextFunction
             getSymbolValueModel().getLatest(symbol.symbol)
         ));
         res.render('users/dashboard', {
+            userSymbols,
             symbolValues
         });
     } catch(err) {
