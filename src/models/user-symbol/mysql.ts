@@ -30,6 +30,14 @@ class MySQL implements Model {
 
         return userSymbols;
     }
+
+    async getUniqueSymbols(): Promise<string[]> {
+        const symbols: {symbol: string}[] = await query(`
+        select distinct symbol FROM users_symbols
+    `);
+        const mapped = symbols.map(symbol => symbol.symbol);
+        return mapped;
+    }
 }
 
 const mysql = new MySQL();

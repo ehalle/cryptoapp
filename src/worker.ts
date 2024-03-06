@@ -2,6 +2,7 @@ import config from 'config';
 import mysql from 'mysql2';
 import util from 'util';
 import mongoose from 'mongoose';
+import getModel from './models/user-symbol/factory';
 
 // mysql init
 const connection = mysql.createConnection(config.get('mysql'));
@@ -22,17 +23,22 @@ const database = config.get<string>('mongo.database');
 // scrape all symbols
 // set timeout for next cycle
 
+async function scrape(symbol: string) {
+
+}
+
 async function work() {
     try {
-
-    } catch(err) {
+        const symbols = await getModel().getUniqueSymbols();
+        await Promise.allSettled(symbols.map(scrape));
+    } catch (err) {
         console.log(err);
     } finally {
         setTimeout(work, config.get<number>('worker.interval'));
     }
 }
 
-(async() => {
+(async () => {
     await Promise.all([
         connect(),
         mongoose.connect(`mongodb://${host}:${port}/${database}`)
