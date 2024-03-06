@@ -1,27 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CryptoApp dashboard</title>
-    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js" integrity="sha384-Gr6Lu2Ajx28mzwyVR8CFkULdCU7kMlZ9UthllibdOSo6qAiN+yXNHqtgdTvFXMT4" crossorigin="anonymous"></script>
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"
+        integrity="sha384-Gr6Lu2Ajx28mzwyVR8CFkULdCU7kMlZ9UthllibdOSo6qAiN+yXNHqtgdTvFXMT4"
+        crossorigin="anonymous"></script>
     <script>
         const socket = io('ws://<%= io.host %>:<%= io.port %>');
         socket.on('update your list', message => {
             console.log(`Received an 'update your list' message:`, message);
-            const {symbol, value} = message;
+            const { symbol, value } = message;
             document.getElementById(`${symbol}-value`).innerHTML = value;
         });
     </script>
+    <style>
+        table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table td,
+        table th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        table tr:hover {
+            background-color: #ddd;
+        }
+
+        table th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        button {
+            background-color: #04AA6D;
+            border: none;
+            color: white;
+            padding: 4px 20px;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        input[type=text],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
+
 <body>
     <form method="post" action="/users/symbols/add">
         <input type="text" name="symbol" placeholder="Crypto token">
         <button>Add Symbol</button>
     </form>
 
-    <br/>
-    <br/>
+    <br />
+    <br />
 
     <table>
         <thead>
@@ -31,13 +89,18 @@
             </tr>
         </thead>
         <tbody>
-            <% userSymbols.forEach(userSymbol => { %>
+            <% userSymbols.forEach(userSymbol=> { %>
                 <tr>
-                    <td><%= userSymbol.symbol %></td>
-                    <td id="<%= userSymbol.symbol %>-value"><%= symbolValues.find(e => e?.symbol === userSymbol?.symbol)?.value %></td>
+                    <td>
+                        <%= userSymbol.symbol %>
+                    </td>
+                    <td id="<%= userSymbol.symbol %>-value">
+                        <%= symbolValues.find(e=> e?.symbol === userSymbol?.symbol)?.value %>
+                    </td>
                 </tr>
-            <% }) %>
+                <% }) %>
         </tbody>
     </table>
 </body>
+
 </html>
