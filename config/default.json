@@ -1,9 +1,20 @@
 {
     "app": {
-        "port": 8082
+        "port": 8082,
+        "io": {
+            "host": "localhost",
+            "port": 8084
+        }
     },
     "worker": {
-        "interval": 30000
+        "interval": 30000,
+        "io": {
+            "host": "localhost",
+            "port": 8084
+        }
+    },
+    "io": {
+        "port": 8084
     },
     "mysql": {
         "host": "localhost",
