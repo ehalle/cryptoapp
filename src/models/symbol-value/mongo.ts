@@ -8,14 +8,19 @@ const symbolValueSchema = new mongoose.Schema<DTO>({
     when: Date
 });
 
-const SymbolValueModel = mongoose.model<DTO>('SymbolValue', symbolValueSchema);
+const symbolValueModel = mongoose.model<DTO>('SymbolValue', symbolValueSchema);
 
 class Mongo implements Model {
     async add(symbolValue: DTO): Promise<DTO> {    
-        const newSymbolValue = new SymbolValueModel<DTO>(symbolValue);
+        const newSymbolValue = new symbolValueModel<DTO>(symbolValue);
         await newSymbolValue.save();
         console.log(`Symbol value created, with id ${newSymbolValue.id}`);
         return newSymbolValue;
+    }
+
+    async getLatest(symbol: string): Promise<DTO> {
+        const symbolValue: DTO[] = await symbolValueModel.find({ symbol }).sort({ when: -1}).limit(1);
+        return symbolValue[0];
     }
 }
 
