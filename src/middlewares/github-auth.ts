@@ -7,7 +7,7 @@ passport.serializeUser((user, done) => {
     done(null, user);
 });
 
-passport.deserializeUser((user, done) => {
+passport.deserializeUser((user: Express.User, done) => {
     done(null, user);
 });
 
@@ -23,9 +23,6 @@ passport.use(new Strategy({ ...config.get('github') }, async function (accessTok
     } catch(err) {
         done(err);
     }
-    // User.findOrCreate({ githubId: profile.id }, function (err, user) {
-    //   return done(err, user);
-    // });
 }
 ));
 

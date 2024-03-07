@@ -8,6 +8,14 @@ import errorHandler from './middlewares/error/error-handler';
 import session from 'express-session';
 import auth from './middlewares/github-auth';
 
+declare global {
+    namespace Express {
+        interface User {
+            id: number
+        }
+    }
+}
+
 const server = express();
 const port = config.get<number>('app.port');
 
