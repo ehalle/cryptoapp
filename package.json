@@ -4,14 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "ts-node src/initdb.ts && nodemon --exec ts-node src/app.ts",
     "start": "node ./dist/initdb && node ./dist/app",
     "build": "tsc && cp -r ./config ./dist/config && cp -r ./src/views ./dist/views",
     "worker:dev": "ts-node src/worker",
     "worker": "node ./dist/worker",
     "io:dev": "ts-node src/io",
-    "io": "node ./dist/io"
+    "io": "node ./dist/io",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
