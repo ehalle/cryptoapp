@@ -1,5 +1,7 @@
 import express from 'express';
-import userRouter from './routers/users';
+import usersRouter from './routers/users';
+import guestsRouter from './routers/guests';
+import githubRouter from './routers/github';
 import path from 'path';
 import config from 'config';
 import errorHandler from './middlewares/error/error-handler';
@@ -25,7 +27,9 @@ server.use(auth.initialize());
 server.use(auth.session());
 
 //routing
-server.use('/users', userRouter);
+server.use('/', guestsRouter);
+server.use('/users', usersRouter);
+server.use('/github', githubRouter);
 
 server.get('/login')
 
