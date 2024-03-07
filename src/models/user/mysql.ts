@@ -23,12 +23,11 @@ class MySQL implements Model {
     }
 
     async get(githubId: string): Promise<DTO> {
-        const user: DTO = await query(`
+        const user: DTO = (await query(`
         select  id, github_id
         FROM    users
         WHERE   github_id = ? 
-    `, [githubId])[0];
-
+    `, [githubId]))[0];
     return user;
     }
 }
